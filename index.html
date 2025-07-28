@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>打开App</title>
+  <script>
+    function openApp() {
+      var schemeUrl = 'app://com.hihonor.magicavatar?code=value'; // 自定义URL Scheme
+      var downloadUrl = 'https://yourdomain.com/download'; // App下载页
+      var startTime = Date.now();
+      // 通过iframe尝试打开App
+      var iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.src = schemeUrl;
+      document.body.appendChild(iframe);
+
+      // 2秒后检测是否跳转成功
+      setTimeout(function () {
+        var endTime = Date.now();
+        if (endTime - startTime < 2000) {
+          // App未打开，跳转下载页
+          window.location.href = downloadUrl;
+        }
+      }, 1500);
+    }
+    window.onload = openApp;
+  </script>
+</head>
+<body>
+  <h2>正在尝试打开App...</h2>
+  <p>如果没有自动跳转，请 <a href="https://yourdomain.com/download">点击这里下载App</a></p>
+</body>
+</html>
